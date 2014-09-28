@@ -1,9 +1,9 @@
 var Stage = function()
 {
-  var width = 640;
-  var height = 320;
+  var width = 320;
+  var height = 640;
 
-  this.drawCanv = new Canv(width,height);
+  this.drawCanv = new Canv(width/8,height/8);
   this.drawCanv.context.fillStyle = "#000000";
   this.drawCanv.context.strokeStyle = "#000000";
   this.drawCanv.context.font = "12px vg_font";

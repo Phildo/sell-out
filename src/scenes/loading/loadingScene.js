@@ -14,7 +14,7 @@ var LoadingScene = function(game, canv)
 
   this.ready = function()
   {
-    pad = 20;
+    pad = 10;
     barw = (canv.canvas.width-(2*pad));
     progress = 0;
     //canv.context.fillStyle = "#000000";
