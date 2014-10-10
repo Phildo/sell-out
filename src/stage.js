@@ -1,7 +1,7 @@
 var Stage = function()
 {
-  var width = 320;
-  var height = 640;
+  var width = 640;
+  var height = 320;
 
   this.drawCanv = new Canv(width/8,height/8);
   this.drawCanv.context.fillStyle = "#000000";

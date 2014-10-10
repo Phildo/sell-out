@@ -34,7 +34,7 @@ var LoadingScene = function(game, canv)
 
   this.tick = function()
   {
-    if(progress <= imagesloaded/(images.length+1)) progress += 0.01;
+    if(progress <= imagesloaded/(images.length+1)) progress += 0.11;
     if(progress >= 1.0) game.nextScene();
   };
 

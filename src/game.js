@@ -1,7 +1,7 @@
 var Game = function()
 {
   var stage = new Stage();
-  var scenes = [new NullScene(this, stage.drawCanv), new LoadingScene(this, stage.drawCanv), new GamePlayScene(this, stage.drawCanv)];
+  var scenes = [new NullScene(this, stage.drawCanv), new LoadingScene(this, stage.drawCanv), new IntroScene(this, stage.drawCanv), new GamePlayScene(this, stage.drawCanv)];
   var currentScene = 0;
 
   this.begin = function()

@@ -1,9 +1,13 @@
 var GamePlayScene = function(game, canv)
 {
   var self = this;
+  var drawer;
+  var dragger;
 
   self.ready = function()
   {
+    drawer = new Drawer(canv);
+    dragger = new Dragger(canv);
   };
 
   self.tick = function()
