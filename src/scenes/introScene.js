@@ -12,7 +12,7 @@ var IntroScene = function(game, canv)
     dragger = new Dragger(canv);
     assetter = new Assetter(canv);
 
-    logo = new LenoLogo({"x":0,"y":0,"w":50,"h":10});
+    logo = new LenoLogo({"x":10,"y":10,"w":50,"h":10});
     drawer.register(logo);
   };
 
@@ -47,28 +47,7 @@ var IntroScene = function(game, canv)
 
     self.draw = function(canv)
     {
-      canv.context.drawImage(assetter.asset("logo.png"),10,10,50,10);
-      /* example of what not to do
-      canv.context.strokeStyle = "#000000";
-      canv.context.lineWidth = 1;
-
-      canv.context.beginPath();
-      //L
-      canv.context.moveTo(x(0.1),y(0));
-      canv.context.lineTo(x(0),  y(0.9));
-      canv.context.lineTo(x(0.1),  y(0.9));
-
-      //e
-      canv.context.moveTo(x(0.1),  y(0.6));
-      canv.context.lineTo(x(0.2),  y(0.6));
-      canv.context.arc(   x(0.15), y(0.6), x(0.05), 0, 0.2 * Math.PI, true);
-
-      canv.context.moveTo(x(0.23),  y(0.4));
-      canv.context.lineTo(x(0.22),  y(0.9));
-      canv.context.arc(   x(0.28),  y(0.6), x(0.05), 1.0 * Math.PI, 0, false);
-
-      canv.context.stroke();
-      */
+      canv.context.drawImage(assetter.asset("logo.png"),self.x,self.y,self.w,self.h);
     }
   }
 

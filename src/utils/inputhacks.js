@@ -1,10 +1,6 @@
 var platform = "PC";
+var scale = 1/8;
 var debug = false;
-
-var theoreticalWidthOfStuff = 640;
-var theoreticalHeightOfStuff = 1008;
-var actualWidthOfStuff = 640;
-var actualHeightOfStuff = 1008;
 
 function debugLog(txt)
 {
@@ -24,24 +20,7 @@ function addOffsetToEvt(evt)
     evt.philY = evt.offsetY;
   }
 
-  evt.philX = (evt.philX/actualWidthOfStuff)*theoreticalWidthOfStuff;
-  evt.philY = (evt.philY/actualHeightOfStuff)*theoreticalHeightOfStuff;
-}
-function hackInputs()
-{
-  actualWidthOfStuff = window.innerWidth;
-  actualHeightOfStuff = window.innerHeight;
-  document.getElementById("dabody").style.width = actualWidthOfStuff+"px";
-  document.getElementById("dabody").style.height = actualHeightOfStuff+"px";
-  document.getElementById("debug").style.width = actualWidthOfStuff+"px";
-  document.getElementById("debug").style.height = actualHeightOfStuff+"px";
-  document.getElementById("stage_container").style.width = actualWidthOfStuff+"px";
-  document.getElementById("stage_container").style.height = actualHeightOfStuff+"px";
-  var children = document.getElementById("stage_container").childNodes;
-  for(var i = 0; i < children.length; i++)
-  {
-    children[i].style.width = actualWidthOfStuff+"px";
-    children[i].style.height = actualHeightOfStuff+"px";
-  }
+  evt.philX = evt.philX*scale;
+  evt.philY = evt.philY*scale;
 }
 
