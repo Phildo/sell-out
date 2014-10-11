@@ -3,35 +3,70 @@ var Hoverer = function()
   var self = this;
 
   var hoverables = [];
-  var callbackQueue = [];
-  var evtQueue = [];
-  self.register = function(hoverable) { hoverables.push(hoverable); }
-  self.unregister = function(hoverable) { hoverables.splice(hoverables.indexOf(hoverable),1); }
-  self.clear = function() { hoverables = []; }
+  var hovering = [];
+  var nothovering = [];
+  var hoverCallbackQueue = [];
+  var hoverEvtQueue = [];
+  var unhoverCallbackQueue = [];
+  var unhoverEvtQueue = [];
+  self.register = function(hoverable) { hoverables.push(hoverable); nothovering.push(hoverable); }
+  self.unregister = function(hoverable) 
+  {
+    hoverables.splice(hoverables.indexOf(hoverable),1);
+    if(   hovering.indexOv(hoverable))    hovering.splice(   hovering.indexOf(hoverable),1);
+    if(nothovering.indexOv(hoverable)) nothovering.splice(nothovering.indexOf(hoverable),1);
+  }
+  self.clear = function() { hoverables = []; hovering = []; nothovering = []; }
 
   function hover(evt)
   {
     addOffsetToEvt(evt);
-    for(var i = 0; i < hoverables.length; i++)
+
+    for(var i = 0; i < nothovering.length; i++)
     {
       if(
-        evt.philX >= hoverables[i].x &&
-        evt.philX <= hoverables[i].x+hoverables[i].w &&
-        evt.philY >= hoverables[i].y &&
-        evt.philY <= hoverables[i].y+hoverables[i].h
+        evt.philX >= nothovering[i].x &&
+        evt.philX <= nothovering[i].x+nothovering[i].w &&
+        evt.philY >= nothovering[i].y &&
+        evt.philY <= nothovering[i].y+nothovering[i].h
       )
       {
-        callbackQueue.push(hoverables[i].hover);
-        evtQueue.push(evt);
+        hoverCallbackQueue.push(nothovering[i].hover);
+        hoverEvtQueue.push(evt);
+
+        hovering.push(nothovering[i]);
+        nothovering.splice(i--,1);
+      }
+    }
+
+    for(var i = 0; i < hovering.length; i++)
+    {
+      if(
+        evt.philX < hovering[i].x ||
+        evt.philX > hovering[i].x+hovering[i].w ||
+        evt.philY < hovering[i].y ||
+        evt.philY > hovering[i].y+hovering[i].h
+      )
+      {
+        nothoverCallbackQueue.push(hovering[i].unhover);
+        nothoverEvtQueue.push(evt);
+
+        nothovering.push(hovering[i]);
+        hovering.splice(i--,1);
       }
     }
   }
   self.flush = function()
   {
-    for(var i = 0; i < callbackQueue.length; i++)
-      callbackQueue[i](evtQueue[i]);
-    callbackQueue = [];
-    evtQueue = [];
+    for(var i = 0; i < hoverCallbackQueue.length; i++)
+      hoverCallbackQueue[i](hoverEvtQueue[i]);
+    hoverCallbackQueue = [];
+    hoverEvtQueue = [];
+
+    for(var i = 0; i < nothoverCallbackQueue.length; i++)
+      nothoverCallbackQueue[i](nothoverEvtQueue[i]);
+    nothoverCallbackQueue = [];
+    nothoverEvtQueue = [];
   }
 
   if(platform == "PC")
@@ -40,7 +75,7 @@ var Hoverer = function()
     ; //no hover on mobile, dummy
 }
 
-//example hoverable- just needs x,y,w,h and hover callback
+//example hoverable- just needs x,y,w,h, hover and unhover callback
 var Hoverable = function(args)
 {
   var self = this;
@@ -50,6 +85,7 @@ var Hoverable = function(args)
   self.w = args.w ? args.w : 0;
   self.h = args.h ? args.h : 0;
   self.hover = args.hover ? args.hover : function(){};
+  self.unhover = args.unhover ? args.unhover : function(){};
 
   //nice for debugging purposes
   self.draw = function(canv)
