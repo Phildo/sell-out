@@ -7,8 +7,8 @@ var Hoverer = function()
   var nothovering = [];
   var hoverCallbackQueue = [];
   var hoverEvtQueue = [];
-  var unhoverCallbackQueue = [];
-  var unhoverEvtQueue = [];
+  var nothoverCallbackQueue = [];
+  var nothoverEvtQueue = [];
   self.register = function(hoverable) { hoverables.push(hoverable); nothovering.push(hoverable); }
   self.unregister = function(hoverable) 
   {

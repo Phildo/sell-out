@@ -21,7 +21,7 @@ var IntroScene = function(game, canv)
     logo = new LenoLogo({"x":10,"y":10,"w":50,"h":10});
     drawer.register(logo);
 
-    slap = new Slap({"x":10,"y":10,"w":50,"h":10});
+    slap = new Slap({"x":10,"y":25,"w":50,"h":10});
     drawer.register(slap);
     hoverer.register(slap);
     clicker.register(slap);
@@ -29,7 +29,9 @@ var IntroScene = function(game, canv)
 
   self.tick = function()
   {
-
+    dragger.flush();
+    hoverer.flush();
+    clicker.flush();
   };
 
   self.draw = function()
@@ -45,7 +47,6 @@ var IntroScene = function(game, canv)
     clicker = null;
     assetter = null;
   };
-
 
   var LenoLogo = function(args)
   {
@@ -87,15 +88,15 @@ var IntroScene = function(game, canv)
     }
     self.hover = function()
     {
-
+      console.log('hover');
     }
     self.unhover = function()
     {
-
+      console.log('unhover');
     }
     self.click = function()
     {
-
+      console.log('clickhover');
     }
   }
 
