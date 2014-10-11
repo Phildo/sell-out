@@ -5,6 +5,7 @@ var LoadingScene = function(game, canv)
   var progress;
 
   var imagesloaded = 0;
+  var numimages = 1;
   var images = [];
 
   var imageLoaded = function()
@@ -21,14 +22,12 @@ var LoadingScene = function(game, canv)
     //canv.context.font = "20px vg_font";
     //canv.context.fillText(".",0,0);// funky way to encourage the custom font to load
 
-    for(var i = 0; i < images.length; i++)
+    for(var i = 0; i < numimages; i++)
     {
       images[i] = new Image();
       images[i].onload = imageLoaded; 
     }
-    /*
-    images[0].src = "assets/man.png";
-    */
+    images[0].src = "assets/logo.png";
     imageLoaded(); //call once to prevent 0/0 != 100% bug
   };
 

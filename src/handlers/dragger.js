@@ -12,7 +12,6 @@ var Dragger = function()
 
   function begin(evt)
   {
-    debugLog("BeginDrag");
     addOffsetToEvt(evt);
     for(var i = 0; i < draggables.length; i++)
     {
@@ -31,7 +30,6 @@ var Dragger = function()
   }
   function drag(evt)
   {
-    debugLog("Drag");
     addOffsetToEvt(evt);
     for(var i = 0; i < dragging.length; i++)
     {
@@ -41,7 +39,6 @@ var Dragger = function()
   }
   function end(evt)
   {
-    debugLog("EndDrag");
     addOffsetToEvt(evt);
     for(var i = 0; i < dragging.length; i++)
     {
