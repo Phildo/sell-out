@@ -5,7 +5,7 @@ var LoadingScene = function(game, canv)
   var progress;
 
   var imagesloaded = 0;
-  var numimages = 1;
+  var numimages = 2;
   var images = [];
 
   var imageLoaded = function()
@@ -28,6 +28,7 @@ var LoadingScene = function(game, canv)
       images[i].onload = imageLoaded; 
     }
     images[0].src = "assets/logo.png";
+    images[1].src = "assets/slap.png";
     imageLoaded(); //call once to prevent 0/0 != 100% bug
   };
 

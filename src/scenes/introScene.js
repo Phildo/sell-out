@@ -18,10 +18,10 @@ var IntroScene = function(game, canv)
     clicker = new Clicker(canv);
     assetter = new Assetter(canv);
 
-    logo = new LenoLogo({"x":10,"y":10,"w":50,"h":10});
+    logo = new LenoLogo({"x":15,"y":5,"w":50,"h":10});
     drawer.register(logo);
 
-    slap = new Slap({"x":10,"y":25,"w":50,"h":10});
+    slap = new Slap({"x":25,"y":20,"w":30,"h":14});
     drawer.register(slap);
     hoverer.register(slap);
     clicker.register(slap);
@@ -71,6 +71,7 @@ var IntroScene = function(game, canv)
   var Slap = function(args)
   {
     var self = this;
+    var hovering = false;
 
     //example args
     self.x = args.x ? args.x : 0;
@@ -84,19 +85,26 @@ var IntroScene = function(game, canv)
 
     self.draw = function(canv)
     {
-      canv.context.drawImage(assetter.asset("logo.png"),self.x,self.y,self.w,self.h);
+      hovering ? (canv.context.fillStyle = "#E12218") : (canv.context.fillStyle = "#F13228");
+      canv.context.fillRect(self.x,self.y,self.w,self.h);
+
+      canv.context.strokeStyle = "#000000";
+      canv.context.rect(self.x,self.y,self.w,self.h);
+      canv.context.stroke();
+
+      canv.context.drawImage(assetter.asset("slap.png"),self.x+2,self.y+2,self.w-4,self.h-4);
     }
     self.hover = function()
     {
-      console.log('hover');
+      hovering = true;
     }
     self.unhover = function()
     {
-      console.log('unhover');
+      hovering = false;
     }
     self.click = function()
     {
-      console.log('clickhover');
+      game.nextScene();
     }
   }
 
