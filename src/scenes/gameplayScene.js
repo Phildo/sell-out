@@ -174,7 +174,8 @@ var GamePlayScene = function(game, canv)
 
     self.draw = function()
     {
-      canv.context.drawImage(assetter.asset("brad.png"),self.x,self.y,self.w,self.h);
+      if(state == st_aim || state == st_power || state == st_slap)
+        canv.context.drawImage(assetter.asset("brad.png"),self.x,self.y,self.w,self.h);
     }
   }
 
