@@ -15,6 +15,12 @@ var GamePlayScene = function(game, canv)
   var ground;
   var bg;
 
+  var st_aim = 0;
+  var st_power = 1;
+  var st_slap = 2;
+  var st_fly = 3;
+  var state = st_aim;
+
   self.ready = function()
   {
     ticker = new Ticker(canv);
@@ -97,6 +103,7 @@ var GamePlayScene = function(game, canv)
 
     self.rotation = 0;
     self.rotating = 1;
+    self.power = 1;
 
     //homo coords
     //
@@ -113,18 +120,27 @@ var GamePlayScene = function(game, canv)
 
     function x(inx,iny)
     {
-      return (self.x+((((inx*2-1)*c - (iny*2-1)*s)+1)/2)*self.w)-cam.x;
+      return (self.x+(((((inx*2-1)*c - (iny*2-1)*s)*self.power)+1)/2)*self.w)-cam.x;
     }
     function y(inx,iny)
     {
-      return (self.y+((((inx*2-1)*s + (iny*2-1)*c)+1)/2)*self.h)-cam.y;
+      return (self.y+(((((inx*2-1)*s + (iny*2-1)*c)*self.power)+1)/2)*self.h)-cam.y;
     }
 
+    var t = 0;
     self.tick = function()
     {
-      self.rotation += 2*self.rotating;
-      if(self.rotation >=  70 && self.rotating ==  1) self.rotating = -1;
-      if(self.rotation <= -70 && self.rotating == -1) self.rotating =  1;
+      if(state == st_aim)
+      {
+        self.rotation += 2*self.rotating;
+        if(self.rotation >=  70 && self.rotating ==  1) self.rotating = -1;
+        if(self.rotation <= -70 && self.rotating == -1) self.rotating =  1;
+        t = 0;
+      }
+      else if(state == st_power)
+      {
+        self.power = (Math.sin(t)+1)/2+0.5; t+=0.05;
+      }
       calctrig();
     }
     self.draw = function(canv)
@@ -157,12 +173,21 @@ var GamePlayScene = function(game, canv)
     self.draw = function(canv)
     {
       canv.context.strokeStyle = "#D11208";
+      if(hovering) canv.context.fillStyle = "#F6372D";
+      else         canv.context.fillStyle = "#E6271D";
       canv.context.beginPath();
       canv.context.moveTo(x(0.1),y(0.0));
       canv.context.lineTo(x(0.0),y(1.0));
       canv.context.lineTo(x(0.9),y(1.0));
       canv.context.lineTo(x(1.0),y(0.0));
       canv.context.lineTo(x(0.1),y(0.0));
+      canv.context.stroke();
+      canv.context.fill();
+      canv.context.strokeStyle = "#000000";
+      canv.context.beginPath();
+      canv.context.moveTo(x(0.55),y(0.15));
+      canv.context.lineTo(x(0.45),y(0.85));
+      canv.context.lineTo(x(0.55),y(0.85));
       canv.context.stroke();
     }
     self.hover = function()
@@ -176,6 +201,8 @@ var GamePlayScene = function(game, canv)
     self.click = function()
     {
       cam.shake(5);
+      if(state == st_aim) state = st_power;
+      else if(state == st_power) state = st_slap;
     }
   }
 
@@ -194,9 +221,11 @@ var GamePlayScene = function(game, canv)
 
     self.draw = function(canv)
     {
-      canv.context.strokeStyle = "#444444";
+      canv.context.strokeStyle = "#777777";
+      canv.context.fillStyle = "#999999";
       canv.context.rect(x(0),y(0),self.w,self.h);
       canv.context.stroke();
+      canv.context.fill();
     }
   }
 
