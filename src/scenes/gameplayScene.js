@@ -14,6 +14,7 @@ var GamePlayScene = function(game, canv)
   var brad;
   var hand;
   var laptop;
+  var footballs;
   var podium;
   var grass;
   var ground;
@@ -55,6 +56,10 @@ var GamePlayScene = function(game, canv)
 
     podium = new Podium({"x":40,"y":canv.height-36,"w":3,"h":26}, camera);
     drawer.register(podium);
+
+    footballs = new Footballs({}, camera);
+    ticker.register(footballs);
+    drawer.register(footballs);
 
     laptop = new Laptop({"x":30,"y":canv.height-50,"w":25,"h":14}, camera);
     ticker.register(laptop);
@@ -384,7 +389,7 @@ var GamePlayScene = function(game, canv)
       }
       if(state == st_pause)
       {
-        canv.context.fillStyle = "#000000";
+        canv.context.fillStyle = "#FF0000";
         canv.context.fillText("< NOW!",68,40);
         canv.context.fillText("< NOW!",68,40);
         canv.context.fillText("< NOW!",68,40);
@@ -398,7 +403,6 @@ var GamePlayScene = function(game, canv)
         canv.context.fillText("< Retry?",68,58);
         canv.context.fillText("< Retry?",68,58);
         canv.context.fillText("< Retry?",68,58);
-        console.log('d');
       }
 
       canv.context.strokeStyle = "#C10208";
@@ -409,6 +413,7 @@ var GamePlayScene = function(game, canv)
         canv.context.strokeStyle = "#FF0000";
         canv.context.fillStyle = "#FF0000";
       }
+      if(self.sup) canv.context.fillStyle = "#FFFFFF";
       canv.context.beginPath();
       canv.context.moveTo(x(0.1,0.0),y(0.1,0.0));
       canv.context.lineTo(x(0.0,1.0),y(0.0,1.0));
@@ -467,6 +472,40 @@ var GamePlayScene = function(game, canv)
       }
     }
   }
+
+  var Footballs = function(args, cam)
+  {
+    var self = this;
+
+    var x = -5;
+    var y = 15;
+
+    var mod = 500;
+    self.draw = function(canv)
+    {
+      canv.context.strokeStyle = "#8B1B05";
+      canv.context.fillStyle = "#AB3B25";
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y-6,10,3.1415/4,3*3.1415/4, false);
+      canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+6,10,5*3.1415/4,7*3.1415/4, false);
+      canv.context.stroke();
+      canv.context.fill();
+    }
+    self.tick = function()
+    {
+      var truex = mod-(score/2+x)%mod-20-cam.x;
+      var truey = canv.height-y-cam.y;
+      if(laptop.x+10 > truex - 15 && laptop.x+10 < truex + 15 &&
+         laptop.y+10 > truey - 15 && laptop.y+10 < truey + 15)
+      {
+        laptop.f_y+=10;
+        laptop.f_x*=2;
+        cam.shake(10);
+      }
+    }
+  }
+
+
 
   var Podium = function(args, cam)
   {
