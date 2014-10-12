@@ -155,7 +155,6 @@ var GamePlayScene = function(game, canv)
         canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
         canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
         canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(laptop.y/-10)/10+"m",canv.width-30,30);
       }
     }
   }
@@ -327,6 +326,22 @@ var GamePlayScene = function(game, canv)
       canv.context.lineTo(x(0.45),y(0.85));
       canv.context.lineTo(x(0.55),y(0.85));
       canv.context.stroke();
+
+      if(self.y < -20)
+      {
+        canv.context.fillStyle = "#000000";
+
+        canv.context.beginPath();
+        canv.context.moveTo(self.x+10-2,5);
+        canv.context.lineTo(self.x+10,  1);
+        canv.context.lineTo(self.x+10+2,5);
+        canv.context.stroke();
+
+        canv.context.fillText(Math.round(self.y/-10)/10+"m",self.x,15);
+        canv.context.fillText(Math.round(self.y/-10)/10+"m",self.x,15);
+        canv.context.fillText(Math.round(self.y/-10)/10+"m",self.x,15);
+        canv.context.fillText(Math.round(self.y/-10)/10+"m",self.x,15);
+      }
     }
     self.hover = function()
     {
