@@ -348,6 +348,7 @@ var GamePlayScene = function(game, canv)
           }
           self.y = 50;
           self.f_x *= 0.7;
+          cam.shake(self.f_x/2);
         }
       }
     }
