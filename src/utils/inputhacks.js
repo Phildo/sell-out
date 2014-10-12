@@ -1,5 +1,5 @@
 var platform = "PC";
-var scale = 1/8;
+var scale = 1/4;
 var debug = false;
 
 function debugLog(txt)
