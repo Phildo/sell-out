@@ -265,6 +265,7 @@ var GamePlayScene = function(game, canv)
           if(laptop.sup) laptop.f_y *= 2;
           laptop.sup = false;
           cam.shake(10);
+          self.power = 1;
         }
       }
       calctrig();
@@ -481,15 +482,19 @@ var GamePlayScene = function(game, canv)
     var y = 15;
 
     var mod = 500;
+    var invisibletil = 0;
     self.draw = function(canv)
     {
-      canv.context.strokeStyle = "#8B1B05";
-      canv.context.fillStyle = "#AB3B25";
-      canv.context.beginPath();
-      canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y-6,10,3.1415/4,3*3.1415/4, false);
-      canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+6,10,5*3.1415/4,7*3.1415/4, false);
-      canv.context.stroke();
-      canv.context.fill();
+      if(score > invisibletil)
+      {
+        canv.context.strokeStyle = "#8B1B05";
+        canv.context.fillStyle = "#AB3B25";
+        canv.context.beginPath();
+        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y-6,10,3.1415/4,3*3.1415/4, false);
+        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+6,10,5*3.1415/4,7*3.1415/4, false);
+        canv.context.stroke();
+        canv.context.fill();
+      }
     }
     self.tick = function()
     {
@@ -501,6 +506,7 @@ var GamePlayScene = function(game, canv)
         laptop.f_y+=10;
         laptop.f_x*=2;
         cam.shake(10);
+        invisibletil = score+400;
       }
     }
   }
