@@ -11,6 +11,7 @@ var GamePlayScene = function(game, canv)
 
   var scoreD;
   var countD;
+  var brad;
   var hand;
   var laptop;
   var podium;
@@ -52,6 +53,9 @@ var GamePlayScene = function(game, canv)
     drawer.register(laptop);
     hoverer.register(laptop);
     clicker.register(laptop);
+
+    brad = new Brad({"x":25,"y":0,"w":30,"h":30});
+    drawer.register(brad);
 
     hand = new Hand({"x":20,"y":canv.height-60,"w":45,"h":34}, camera);
     ticker.register(hand);
@@ -156,6 +160,21 @@ var GamePlayScene = function(game, canv)
         canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
         canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
       }
+    }
+  }
+
+  var Brad = function(args)
+  {
+    var self = this;
+
+    self.x = args.x ? args.x : 0;
+    self.y = args.y ? args.y : 0;
+    self.w = args.w ? args.w : 100;
+    self.h = args.h ? args.h : 20;
+
+    self.draw = function()
+    {
+      canv.context.drawImage(assetter.asset("brad.png"),self.x,self.y,self.w,self.h);
     }
   }
 
@@ -304,6 +323,15 @@ var GamePlayScene = function(game, canv)
     }
     self.draw = function(canv)
     {
+      if(state == st_aim)
+      {
+        canv.context.fillStyle = "#000000";
+        canv.context.fillText("< Click!",x(1.5),y(0.7));
+        canv.context.fillText("< Click!",x(1.5),y(0.7));
+        canv.context.fillText("< Click!",x(1.5),y(0.7));
+        canv.context.fillText("< Click!",x(1.5),y(0.7));
+      }
+
       canv.context.strokeStyle = "#C10208";
       if(hovering) canv.context.fillStyle = "#F6372D";
       else         canv.context.fillStyle = "#E6271D";
