@@ -22,6 +22,7 @@ var GamePlayScene = function(game, canv)
   var st_slap = 2;
   var st_pause = 3;
   var st_fly = 4;
+  var st_done = 5;
   var state = st_aim;
 
   var score = 0;
@@ -147,14 +148,14 @@ var GamePlayScene = function(game, canv)
     var self = this;
     self.draw = function(canv)
     {
-      if(state == st_fly)
+      if(state == st_fly || state == st_done)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(laptop.y)+"m",canv.width-30,30);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(laptop.y/-10)/10+"m",canv.width-30,30);
       }
     }
   }
@@ -226,10 +227,8 @@ var GamePlayScene = function(game, canv)
         {
           pausetime = 20;
           state = st_fly;
-          laptop.f_x = Math.cos((self.rotation*3.1415)/180)*self.power;
-          laptop.f_y = -1*Math.sin((self.rotation*3.1415)/180)*self.power;
-          console.log(laptop.f_x);
-          console.log(laptop.f_y);
+          laptop.f_x = Math.cos((self.rotation*3.1415)/180)*self.power * 10;
+          laptop.f_y = -1*Math.sin((self.rotation*3.1415)/180)*self.power * 10;
           cam.shake(10);
         }
       }
@@ -237,7 +236,7 @@ var GamePlayScene = function(game, canv)
     }
     self.draw = function(canv)
     {
-      if(state != st_pause && state != st_fly)
+      if(state == st_aim || state == st_power || state == st_slap)
       {
         if(state == st_slap) self.blink > 0 ? canv.context.strokeStyle = "#EEC9C1" : canv.context.strokeStyle = "#FF8981";
         else                 canv.context.strokeStyle = "#EEC9C1";
@@ -288,7 +287,20 @@ var GamePlayScene = function(game, canv)
       {
         score += self.f_x;
         self.y -= self.f_y;
-        self.f_y -= .01;
+        self.f_y -= .12;
+        if(self.y > 50)
+        {
+          self.f_y *= -1;
+          self.f_y *= 0.7;
+          if(self.f_y < 1)
+          {
+            self.f_y = 0;
+            state = st_done;
+            console.log('done');
+          }
+          self.y = 50;
+          self.f_x *= 0.7;
+        }
       }
     }
     self.draw = function(canv)
@@ -296,6 +308,11 @@ var GamePlayScene = function(game, canv)
       canv.context.strokeStyle = "#C10208";
       if(hovering) canv.context.fillStyle = "#F6372D";
       else         canv.context.fillStyle = "#E6271D";
+      if(state == st_pause)
+      {
+        canv.context.strokeStyle = "#FF0000";
+        canv.context.fillStyle = "#FF0000";
+      }
       canv.context.beginPath();
       canv.context.moveTo(x(0.1),y(0.0));
       canv.context.lineTo(x(0.0),y(1.0));
