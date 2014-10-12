@@ -357,10 +357,20 @@ var GamePlayScene = function(game, canv)
       if(state == st_aim)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText("< Click!",x(1.5),y(0.7));
-        canv.context.fillText("< Click!",x(1.5),y(0.7));
-        canv.context.fillText("< Click!",x(1.5),y(0.7));
-        canv.context.fillText("< Click!",x(1.5),y(0.7));
+        canv.context.fillText("< Click!",68,40);
+        canv.context.fillText("< Click!",68,40);
+        canv.context.fillText("< Click!",68,40);
+        canv.context.fillText("< Click!",68,40);
+      }
+
+      if(state == st_done)
+      {
+        canv.context.fillStyle = "#000000";
+        canv.context.fillText("< Retry?",68,58);
+        canv.context.fillText("< Retry?",68,58);
+        canv.context.fillText("< Retry?",68,58);
+        canv.context.fillText("< Retry?",68,58);
+        console.log('d');
       }
 
       canv.context.strokeStyle = "#C10208";
@@ -415,6 +425,16 @@ var GamePlayScene = function(game, canv)
       cam.shake(5);
       if(state == st_aim) state = st_power;
       else if(state == st_power) state = st_slap;
+      else if(state == st_done)
+      {
+        score = 0;
+        self.rotation = 0;
+        calctrig();
+        self.f_x = 0;
+        self.f_y = 0;
+        self.y = canv.height-50;
+        state = st_aim;
+      }
     }
   }
 
