@@ -150,10 +150,11 @@ var GamePlayScene = function(game, canv)
       if(state == st_fly)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText(score+"m",canv.width-20,10);
-        canv.context.fillText(score+"m",canv.width-20,10);
-        canv.context.fillText(score+"m",canv.width-20,10);
-        canv.context.fillText(score+"m",canv.width-20,10);
+        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score)+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(laptop.y)+"m",canv.width-30,30);
       }
     }
   }
@@ -225,6 +226,10 @@ var GamePlayScene = function(game, canv)
         {
           pausetime = 20;
           state = st_fly;
+          laptop.f_x = Math.cos((self.rotation*3.1415)/180)*self.power;
+          laptop.f_y = -1*Math.sin((self.rotation*3.1415)/180)*self.power;
+          console.log(laptop.f_x);
+          console.log(laptop.f_y);
           cam.shake(10);
         }
       }
@@ -265,6 +270,9 @@ var GamePlayScene = function(game, canv)
     var self = this;
     var hovering = false;
 
+    self.f_x = 0;
+    self.f_y = 0;
+
     self.x = args.x ? args.x : 0;
     self.y = args.y ? args.y : 0;
     self.w = args.w ? args.w : 100;
@@ -276,6 +284,12 @@ var GamePlayScene = function(game, canv)
 
     self.tick = function()
     {
+      if(state == st_fly)
+      {
+        score += self.f_x;
+        self.y -= self.f_y;
+        self.f_y -= .01;
+      }
     }
     self.draw = function(canv)
     {
@@ -323,7 +337,7 @@ var GamePlayScene = function(game, canv)
     self.h = args.h ? args.h : 20;
 
     //homo coords
-    function x(inx) { return (self.x+(inx*self.w))-cam.x; }
+    function x(inx) { return (self.x+(inx*self.w))-cam.x-score; }
     function y(iny) { return (self.y+(iny*self.h))-cam.y; }
 
     self.draw = function(canv)
@@ -355,7 +369,7 @@ var GamePlayScene = function(game, canv)
     {
       canv.context.fillStyle = "#5DCF15";
       canv.context.strokeStyle = "#5DCF15";
-      canv.context.fillRect(-20-cam.x,canv.height-20-cam.y,canv.width+40,40);
+      canv.context.fillRect(-20,canv.height-20-cam.y,canv.width+40,40);
     }
   }
 };
