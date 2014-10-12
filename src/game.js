@@ -19,10 +19,16 @@ var Game = function()
     stage.draw(); //blits from offscreen canvas to on screen one
   };
 
+  var firstTimePlaying = true;
   this.nextScene = function()
   {
     scenes[currentScene].cleanup();
     currentScene++;
+    if(currentScene == 3)
+    {
+      if(firstTimePlaying) document.getElementById('music').play();
+      firstTimePlaying = false;
+    }
     scenes[currentScene].ready();
   };
 };
