@@ -126,18 +126,18 @@ var GamePlayScene = function(game, canv)
       if(state == st_slap)
       {
         canv.context.fillStyle = "#000000";
-        if(tleft > 200) canv.context.fillText("3...",canv.width-20,10);
-        else if(tleft > 100) canv.context.fillText("2...",canv.width-20,10);
-        else if(tleft > 0) canv.context.fillText("1...",canv.width-20,10);
-        if(tleft > 200) canv.context.fillText("3...",canv.width-20,10);
-        else if(tleft > 100) canv.context.fillText("2...",canv.width-20,10);
-        else if(tleft > 0) canv.context.fillText("1...",canv.width-20,10);
-        if(tleft > 200) canv.context.fillText("3...",canv.width-20,10);
-        else if(tleft > 100) canv.context.fillText("2...",canv.width-20,10);
-        else if(tleft > 0) canv.context.fillText("1...",canv.width-20,10);
-        if(tleft > 200) canv.context.fillText("3...",canv.width-20,10);
-        else if(tleft > 100) canv.context.fillText("2...",canv.width-20,10);
-        else if(tleft > 0) canv.context.fillText("1...",canv.width-20,10);
+        if(tleft > 200) canv.context.fillText("3...",105,40);
+        else if(tleft > 100) canv.context.fillText("2...",105,40);
+        else if(tleft > 0) canv.context.fillText("1...",105,40);
+        if(tleft > 200) canv.context.fillText("3...",105,40);
+        else if(tleft > 100) canv.context.fillText("2...",105,40);
+        else if(tleft > 0) canv.context.fillText("1...",105,40);
+        if(tleft > 200) canv.context.fillText("3...",105,40);
+        else if(tleft > 100) canv.context.fillText("2...",105,40);
+        else if(tleft > 0) canv.context.fillText("1...",105,40);
+        if(tleft > 200) canv.context.fillText("3...",105,40);
+        else if(tleft > 100) canv.context.fillText("2...",105,40);
+        else if(tleft > 0) canv.context.fillText("1...",105,40);
       }
     }
     self.tick = function(canv)
@@ -163,10 +163,10 @@ var GamePlayScene = function(game, canv)
       if(state == st_fly || state == st_done)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
-        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-30,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-50,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-50,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-50,10);
+        canv.context.fillText(Math.round(score/10)/10+"m",canv.width-50,10);
       }
     }
   }
@@ -255,7 +255,10 @@ var GamePlayScene = function(game, canv)
           pausetime = 20;
           state = st_fly;
           laptop.f_x = Math.cos((self.rotation*3.1415)/180)*self.power * 10;
+          if(laptop.sup) laptop.f_x *= 2;
           laptop.f_y = -1*Math.sin((self.rotation*3.1415)/180)*self.power * 10;
+          if(laptop.sup) laptop.f_y *= 2;
+          laptop.sup = false;
           cam.shake(10);
         }
       }
@@ -305,6 +308,7 @@ var GamePlayScene = function(game, canv)
     self.h = args.h ? args.h : 20;
 
     self.rotation = 0;
+    self.sup = false;
 
     //homo coords
     var s;
@@ -357,10 +361,34 @@ var GamePlayScene = function(game, canv)
       if(state == st_aim)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText("< Click!",68,40);
-        canv.context.fillText("< Click!",68,40);
-        canv.context.fillText("< Click!",68,40);
-        canv.context.fillText("< Click!",68,40);
+        canv.context.fillText("< Aim!",68,40);
+        canv.context.fillText("< Aim!",68,40);
+        canv.context.fillText("< Aim!",68,40);
+        canv.context.fillText("< Aim!",68,40);
+      }
+      if(state == st_power)
+      {
+        canv.context.fillStyle = "#000000";
+        canv.context.fillText("< Power!",68,40);
+        canv.context.fillText("< Power!",68,40);
+        canv.context.fillText("< Power!",68,40);
+        canv.context.fillText("< Power!",68,40);
+      }
+      if(state == st_slap)
+      {
+        canv.context.fillStyle = "#000000";
+        canv.context.fillText("< Slap!",68,40);
+        canv.context.fillText("< Slap!",68,40);
+        canv.context.fillText("< Slap!",68,40);
+        canv.context.fillText("< Slap!",68,40);
+      }
+      if(state == st_pause)
+      {
+        canv.context.fillStyle = "#000000";
+        canv.context.fillText("< NOW!",68,40);
+        canv.context.fillText("< NOW!",68,40);
+        canv.context.fillText("< NOW!",68,40);
+        canv.context.fillText("< NOW!",68,40);
       }
 
       if(state == st_done)
@@ -389,7 +417,8 @@ var GamePlayScene = function(game, canv)
       canv.context.lineTo(x(0.1,0.0),y(0.1,0.0));
       canv.context.stroke();
       canv.context.fill();
-      canv.context.strokeStyle = "#000000";
+      if(self.sup) canv.context.strokeStyle = "#FFFFFF";
+      else         canv.context.strokeStyle = "#000000";
       canv.context.beginPath();
       canv.context.moveTo(x(0.55,0.15),y(0.55,0.15));
       canv.context.lineTo(x(0.45,0.85),y(0.45,0.85));
@@ -425,6 +454,7 @@ var GamePlayScene = function(game, canv)
       cam.shake(5);
       if(state == st_aim) state = st_power;
       else if(state == st_power) state = st_slap;
+      else if(state == st_pause) { self.sup = true; }
       else if(state == st_done)
       {
         score = 0;
