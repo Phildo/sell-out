@@ -26,6 +26,7 @@ var Game = function()
     currentScene++;
     if(currentScene == 3)
     {
+      document.getElementById('music').volume = 0.2;
       if(firstTimePlaying) document.getElementById('music').play();
       firstTimePlaying = false;
     }

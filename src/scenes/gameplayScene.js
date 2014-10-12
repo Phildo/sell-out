@@ -355,6 +355,7 @@ var GamePlayScene = function(game, canv)
           {
             self.f_y = 0;
             state = st_done;
+            document.getElementById('tough').play();
           }
           self.y = 50;
           self.f_x *= 0.7;
