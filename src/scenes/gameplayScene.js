@@ -15,7 +15,9 @@ var GamePlayScene = function(game, canv)
   var hand;
   var laptop;
   var podium;
+  var grass;
   var ground;
+  var clouds;
   var bg;
 
   var st_aim = 0;
@@ -42,8 +44,14 @@ var GamePlayScene = function(game, canv)
     bg = new BG({}, camera);
     drawer.register(bg);
 
+    clouds = new Clouds({}, camera);
+    drawer.register(clouds);
+
     ground = new Ground({}, camera);
     drawer.register(ground);
+
+    grass = new Grass({}, camera);
+    drawer.register(grass);
 
     podium = new Podium({"x":40,"y":canv.height-36,"w":3,"h":26}, camera);
     drawer.register(podium);
@@ -443,6 +451,28 @@ var GamePlayScene = function(game, canv)
     }
   }
 
+  var Clouds = function(args, cam)
+  {
+    var self = this;
+
+    var offx1 = 0;
+    var offx2 = 100;
+    var offx3 = 135;
+    var offy1 = 10;
+    var offy2 = -5;
+    var offy3 = 15;
+
+    var mod = 200;
+    self.draw = function(canv)
+    {
+      canv.context.fillStyle = "#FFFFFF";
+      canv.context.fillRect(mod-(score/10+offx1)%mod-20,offy1,20,10);
+      canv.context.fillRect(mod-(score/10+offx2)%mod-20,offy2,20,10);
+      canv.context.fillRect(mod-(score/10+offx3)%mod-20,offy3,20,10);
+    }
+  }
+
+
   var Ground = function(args, cam)
   {
     var self = this;
@@ -452,6 +482,27 @@ var GamePlayScene = function(game, canv)
       canv.context.fillStyle = "#5DCF15";
       canv.context.strokeStyle = "#5DCF15";
       canv.context.fillRect(-20,canv.height-20-cam.y,canv.width+40,40);
+    }
+  }
+
+  var Grass = function(args, cam)
+  {
+    var self = this;
+
+    var offx1 = 0;
+    var offx2 = 100;
+    var offx3 = 135;
+    var offy1 = 10;
+    var offy2 = -5;
+    var offy3 = 15;
+
+    var mod = 200;
+    self.draw = function(canv)
+    {
+      canv.context.fillStyle = "#009900";
+      canv.context.fillRect(mod-(score/2+offx1)%mod-20-cam.x,canv.height-offy1-cam.y,10,5);
+      canv.context.fillRect(mod-(score/2+offx2)%mod-20-cam.x,canv.height-offy2-cam.y,10,5);
+      canv.context.fillRect(mod-(score/2+offx3)%mod-20-cam.x,canv.height-offy3-cam.y,10,5);
     }
   }
 };
