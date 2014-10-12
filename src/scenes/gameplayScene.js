@@ -296,17 +296,39 @@ var GamePlayScene = function(game, canv)
     self.w = args.w ? args.w : 100;
     self.h = args.h ? args.h : 20;
 
-    //homo coords
-    function x(inx) { return (self.x+(inx*self.w))-cam.x; }
-    function y(iny) { return (self.y+(iny*self.h))-cam.y; }
+    self.rotation = 0;
 
+    //homo coords
+    var s;
+    var c;
+    function calctrig()
+    {
+      s = Math.sin((self.rotation*3.1415)/180);
+      c = Math.cos((self.rotation*3.1415)/180);
+    }
+
+    function x(inx,iny)
+    {
+      return (self.x+(((((inx*2-1)*c - (iny*2-1)*s))+1)/2)*self.w)-cam.x;
+    }
+    function y(inx,iny)
+    {
+      return (self.y+(((((inx*2-1)*s + (iny*2-1)*c))+1)/2)*self.h)-cam.y;
+    }
+
+    //function x(inx) { return (self.x+(inx*self.w))-cam.x; }
+    //function y(iny) { return (self.y+(iny*self.h))-cam.y; }
+
+    calctrig();
     self.tick = function()
     {
       if(state == st_fly)
       {
+        calctrig();
         score += self.f_x;
         self.y -= self.f_y;
         self.f_y -= .12;
+        self.rotation += self.f_x;
         if(self.y > 50)
         {
           self.f_y *= -1;
@@ -315,7 +337,6 @@ var GamePlayScene = function(game, canv)
           {
             self.f_y = 0;
             state = st_done;
-            console.log('done');
           }
           self.y = 50;
           self.f_x *= 0.7;
@@ -342,18 +363,18 @@ var GamePlayScene = function(game, canv)
         canv.context.fillStyle = "#FF0000";
       }
       canv.context.beginPath();
-      canv.context.moveTo(x(0.1),y(0.0));
-      canv.context.lineTo(x(0.0),y(1.0));
-      canv.context.lineTo(x(0.9),y(1.0));
-      canv.context.lineTo(x(1.0),y(0.0));
-      canv.context.lineTo(x(0.1),y(0.0));
+      canv.context.moveTo(x(0.1,0.0),y(0.1,0.0));
+      canv.context.lineTo(x(0.0,1.0),y(0.0,1.0));
+      canv.context.lineTo(x(0.9,1.0),y(0.9,1.0));
+      canv.context.lineTo(x(1.0,0.0),y(1.0,0.0));
+      canv.context.lineTo(x(0.1,0.0),y(0.1,0.0));
       canv.context.stroke();
       canv.context.fill();
       canv.context.strokeStyle = "#000000";
       canv.context.beginPath();
-      canv.context.moveTo(x(0.55),y(0.15));
-      canv.context.lineTo(x(0.45),y(0.85));
-      canv.context.lineTo(x(0.55),y(0.85));
+      canv.context.moveTo(x(0.55,0.15),y(0.55,0.15));
+      canv.context.lineTo(x(0.45,0.85),y(0.45,0.85));
+      canv.context.lineTo(x(0.55,0.85),y(0.55,0.85));
       canv.context.stroke();
 
       if(self.y < -20)
