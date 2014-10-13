@@ -88,7 +88,12 @@ var IntroScene = function(game, canv)
       canv.context.rect(self.x,self.y,self.w,self.h);
       canv.context.stroke();
 
-      canv.context.drawImage(assetter.asset("slap.png"),self.x+2,self.y+2,self.w-4,self.h-4);
+      canv.context.fillStyle = "#000000";
+      canv.context.fillText("SLAP",self.x+6,self.y+18);
+      canv.context.fillText("SLAP",self.x+6,self.y+18);
+      canv.context.fillText("SLAP",self.x+6,self.y+18);
+      canv.context.fillText("SLAP",self.x+6,self.y+18);
+      canv.context.fillText("SLAP",self.x+6,self.y+18);
     }
     self.hover = function()
     {
