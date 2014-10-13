@@ -360,6 +360,7 @@ var GamePlayScene = function(game, canv)
             state = st_done;
             document.getElementById('tough').play();
           }
+          if(self.f_y > 3) document.getElementById('thud').play();
           self.y = 50;
           self.f_x *= 0.7;
           cam.shake(self.f_x/2);
