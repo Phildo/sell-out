@@ -492,6 +492,7 @@ var GamePlayScene = function(game, canv)
     {
       if(score > invisibletil)
       {
+        invisibletil = 0;
         canv.context.strokeStyle = "#8B1B05";
         canv.context.fillStyle = "#AB3B25";
         canv.context.beginPath();
