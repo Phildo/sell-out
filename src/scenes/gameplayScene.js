@@ -407,10 +407,10 @@ var GamePlayScene = function(game, canv)
       if(state == st_done)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText("<Retry?",68,58);
-        canv.context.fillText("<Retry?",68,58);
-        canv.context.fillText("<Retry?",68,58);
-        canv.context.fillText("<Retry?",68,58);
+        canv.context.fillText("<Retry?",56,58);
+        canv.context.fillText("<Retry?",56,58);
+        canv.context.fillText("<Retry?",56,58);
+        canv.context.fillText("<Retry?",56,58);
       }
 
       canv.context.strokeStyle = "#C10208";
