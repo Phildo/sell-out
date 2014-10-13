@@ -555,17 +555,69 @@ var GamePlayScene = function(game, canv)
     var offx1 = 0;
     var offx2 = 100;
     var offx3 = 135;
-    var offy1 = 10;
-    var offy2 = -5;
-    var offy3 = 15;
+    var offy1 = 20;
+    var offy2 = 5;
+    var offy3 = 25;
 
     var mod = 200;
     self.draw = function(canv)
     {
       canv.context.fillStyle = "#FFFFFF";
-      canv.context.fillRect(mod-(score/10+offx1)%mod-20,offy1,20,10);
-      canv.context.fillRect(mod-(score/10+offx2)%mod-20,offy2,20,10);
-      canv.context.fillRect(mod-(score/10+offx3)%mod-20,offy3,20,10);
+
+      //1
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx1)%mod-20-4, offy1-1,7,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx1)%mod-20+4, offy1-4,9,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx1)%mod-20+14,offy1,8,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      //2
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx2)%mod-20-4, offy2-1,7,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx2)%mod-20+4, offy2-4,9,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx2)%mod-20+14,offy2,8,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+
+      //1
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx3)%mod-20-4, offy3-1,7,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx3)%mod-20+4, offy3-4,9,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      canv.context.beginPath();
+      canv.context.arc(mod-(score/10+offx3)%mod-20+14,offy3,8,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
+
+      //for weird gray bug
+      canv.context.beginPath();
+      canv.context.arc(-5,-5,2,0,2*3.1415, false);
+      canv.context.fill();
+      canv.context.closePath();
     }
   }
 
