@@ -80,6 +80,8 @@ var GamePlayScene = function(game, canv)
 
     scoreD = new Score();
     drawer.register(scoreD);
+
+    document.getElementById('slapit').play();
   };
 
   self.tick = function()
@@ -263,6 +265,7 @@ var GamePlayScene = function(game, canv)
           if(laptop.sup) laptop.f_x *= 2;
           laptop.f_y = -1*Math.sin((self.rotation*3.1415)/180)*self.power * 10;
           if(laptop.sup) laptop.f_y *= 2;
+          if(laptop.sup) document.getElementById('nice').play();
           laptop.sup = false;
           cam.shake(10);
           self.power = 1;
@@ -471,6 +474,7 @@ var GamePlayScene = function(game, canv)
         self.f_y = 0;
         self.y = canv.height-50;
         state = st_aim;
+        document.getElementById('slapit').play();
       }
     }
   }
@@ -507,6 +511,7 @@ var GamePlayScene = function(game, canv)
         laptop.f_y+=10;
         laptop.f_x*=2;
         cam.shake(10);
+        document.getElementById('footbomb').play();
         invisibletil = score+400;
       }
     }
