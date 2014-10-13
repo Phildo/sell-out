@@ -133,18 +133,18 @@ var GamePlayScene = function(game, canv)
       if(state == st_slap)
       {
         canv.context.fillStyle = "#000000";
-        if(tleft > 200) canv.context.fillText("3...",72,56);
-        else if(tleft > 100) canv.context.fillText("2...",72,56);
-        else if(tleft > 0) canv.context.fillText("1...",72,56);
-        if(tleft > 200) canv.context.fillText("3...",72,56);
-        else if(tleft > 100) canv.context.fillText("2...",72,56);
-        else if(tleft > 0) canv.context.fillText("1...",72,56);
-        if(tleft > 200) canv.context.fillText("3...",72,56);
-        else if(tleft > 100) canv.context.fillText("2...",72,56);
-        else if(tleft > 0) canv.context.fillText("1...",72,56);
-        if(tleft > 200) canv.context.fillText("3...",72,56);
-        else if(tleft > 100) canv.context.fillText("2...",72,56);
-        else if(tleft > 0) canv.context.fillText("1...",72,56);
+        if(tleft > 200) canv.context.fillText("IN 3...",56,56);
+        else if(tleft > 100) canv.context.fillText("IN 2...",56,56);
+        else if(tleft > 0) canv.context.fillText("IN 1...",56,56);
+        if(tleft > 200) canv.context.fillText("IN 3...",56,56);
+        else if(tleft > 100) canv.context.fillText("IN 2...",56,56);
+        else if(tleft > 0) canv.context.fillText("IN 1...",56,56);
+        if(tleft > 200) canv.context.fillText("IN 3...",56,56);
+        else if(tleft > 100) canv.context.fillText("IN 2...",56,56);
+        else if(tleft > 0) canv.context.fillText("IN 1...",56,56);
+        if(tleft > 200) canv.context.fillText("IN 3...",56,56);
+        else if(tleft > 100) canv.context.fillText("IN 2...",56,56);
+        else if(tleft > 0) canv.context.fillText("IN 1...",56,56);
       }
     }
     self.tick = function(canv)
@@ -390,10 +390,10 @@ var GamePlayScene = function(game, canv)
       if(state == st_slap)
       {
         canv.context.fillStyle = "#000000";
-        canv.context.fillText("<Slap!",56,42);
-        canv.context.fillText("<Slap!",56,42);
-        canv.context.fillText("<Slap!",56,42);
-        canv.context.fillText("<Slap!",56,42);
+        canv.context.fillText("<SLAP",56,42);
+        canv.context.fillText("<SLAP",56,42);
+        canv.context.fillText("<SLAP",56,42);
+        canv.context.fillText("<SLAP",56,42);
       }
       if(state == st_pause)
       {
