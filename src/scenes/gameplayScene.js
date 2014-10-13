@@ -294,11 +294,13 @@ var GamePlayScene = function(game, canv)
       }
       if(state == st_pause)
       {
+        /*
         canv.context.strokeStyle = "#FF8981";
         canv.context.beginPath();
         canv.context.moveTo(dumbx(0.5,0.3),dumby(0.5,0.3));
         canv.context.lineTo(dumbx(0.5,0.7),dumby(0.5,0.7));
         canv.context.stroke();
+        */
       }
     }
   }
@@ -426,6 +428,9 @@ var GamePlayScene = function(game, canv)
       canv.context.lineTo(x(0.9,1.0),y(0.9,1.0));
       canv.context.lineTo(x(1.0,0.0),y(1.0,0.0));
       canv.context.lineTo(x(0.1,0.0),y(0.1,0.0));
+      canv.context.moveTo(x(0.0,1.0),y(0.0,1.0));
+      canv.context.lineTo(x(-0.2,0.8),y(-0.2,0.8));
+      canv.context.lineTo(x(0.0,0.8),y(0.0,0.8));
       canv.context.stroke();
       canv.context.fill();
       if(self.sup) canv.context.strokeStyle = "#FFFFFF";
