@@ -518,6 +518,7 @@ var GamePlayScene = function(game, canv)
         laptop.f_x*=2;
         cam.shake(10);
         document.getElementById('footbomb').play();
+        document.getElementById('boom').play();
         invisibletil = score+400;
       }
     }
