@@ -463,7 +463,11 @@ var GamePlayScene = function(game, canv)
     {
       cam.shake(5);
       if(state == st_aim) state = st_power;
-      else if(state == st_power) state = st_slap;
+      else if(state == st_power)
+      {
+        setTimeout(function(){document.getElementById('slap').play();},800);
+        state = st_slap;
+      }
       else if(state == st_pause) { self.sup = true; }
       else if(state == st_done)
       {
