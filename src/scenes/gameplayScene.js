@@ -503,6 +503,7 @@ var GamePlayScene = function(game, canv)
         canv.context.beginPath();
         canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y-6,10,3.1415/4,3*3.1415/4, false);
         canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+6,10,5*3.1415/4,7*3.1415/4, false);
+        canv.context.closePath();
         canv.context.stroke();
         canv.context.fill();
       }
@@ -516,7 +517,7 @@ var GamePlayScene = function(game, canv)
       {
         laptop.f_y+=10;
         laptop.f_x*=2;
-        cam.shake(10);
+        cam.shake(30);
         document.getElementById('footbomb').play();
         document.getElementById('boom').play();
         invisibletil = score+400;
