@@ -18,9 +18,8 @@ var LoadingScene = function(game, canv)
     pad = 10;
     barw = (canv.canvas.width-(2*pad));
     progress = 0;
-    //canv.context.fillStyle = "#000000";
-    //canv.context.font = "20px vg_font";
-    //canv.context.fillText(".",0,0);// funky way to encourage the custom font to load
+    canv.context.fillStyle = "#000000";
+    canv.context.fillText(".",0,0);// funky way to encourage the custom font to load
 
     for(var i = 0; i < numimages; i++)
     {
