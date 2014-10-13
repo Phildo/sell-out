@@ -671,10 +671,43 @@ var GamePlayScene = function(game, canv)
     var mod = 200;
     self.draw = function(canv)
     {
-      canv.context.fillStyle = "#009900";
-      canv.context.fillRect(mod-(score/2+offx1)%mod-20-cam.x,canv.height-offy1-cam.y,10,5);
-      canv.context.fillRect(mod-(score/2+offx2)%mod-20-cam.x,canv.height-offy2-cam.y,10,5);
-      canv.context.fillRect(mod-(score/2+offx3)%mod-20-cam.x,canv.height-offy3-cam.y,10,5);
+      canv.context.beginPath();
+      canv.context.moveTo(-1,-1);
+      canv.context.lineTo(-2,-2);
+      canv.context.stroke();
+
+      canv.context.strokeStyle = "#009900";
+      canv.context.beginPath();
+      canv.context.moveTo(mod-(score/2+offx1)%mod-20-cam.x,canv.height-offy1-cam.y);
+      canv.context.lineTo(mod-(score/2+offx1)%mod-20-cam.x+0.4,canv.height-offy1-cam.y-4);
+      canv.context.moveTo(mod-(score/2+offx1)%mod-20-cam.x+2,canv.height-offy1-cam.y+2);
+      canv.context.lineTo(mod-(score/2+offx1)%mod-20-cam.x+0.4+2,canv.height-offy1-cam.y-4+2);
+      canv.context.moveTo(mod-(score/2+offx1)%mod-20-cam.x+5,canv.height-offy1-cam.y-1);
+      canv.context.lineTo(mod-(score/2+offx1)%mod-20-cam.x+0.4+5,canv.height-offy1-cam.y-4-1);
+      canv.context.stroke();
+
+      canv.context.beginPath();
+      canv.context.moveTo(mod-(score/2+offx2)%mod-20-cam.x,canv.height-offy2-cam.y);
+      canv.context.lineTo(mod-(score/2+offx2)%mod-20-cam.x+0.4,canv.height-offy2-cam.y-4);
+      canv.context.moveTo(mod-(score/2+offx2)%mod-20-cam.x+2,canv.height-offy2-cam.y+2);
+      canv.context.lineTo(mod-(score/2+offx2)%mod-20-cam.x+0.4+2,canv.height-offy2-cam.y-4+2);
+      canv.context.moveTo(mod-(score/2+offx2)%mod-20-cam.x+5,canv.height-offy2-cam.y-1);
+      canv.context.lineTo(mod-(score/2+offx2)%mod-20-cam.x+0.4+5,canv.height-offy2-cam.y-4-1);
+      canv.context.stroke();
+
+      canv.context.beginPath();
+      canv.context.moveTo(mod-(score/2+offx3)%mod-20-cam.x,canv.height-offy3-cam.y);
+      canv.context.lineTo(mod-(score/2+offx3)%mod-20-cam.x+0.4,canv.height-offy3-cam.y-4);
+      canv.context.moveTo(mod-(score/2+offx3)%mod-20-cam.x+2,canv.height-offy3-cam.y+2);
+      canv.context.lineTo(mod-(score/2+offx3)%mod-20-cam.x+0.4+2,canv.height-offy3-cam.y-4+2);
+      canv.context.moveTo(mod-(score/2+offx3)%mod-20-cam.x+5,canv.height-offy3-cam.y-1);
+      canv.context.lineTo(mod-(score/2+offx3)%mod-20-cam.x+0.4+5,canv.height-offy3-cam.y-4-1);
+      canv.context.stroke();
+
+      canv.context.beginPath();
+      canv.context.moveTo(-1,-1);
+      canv.context.lineTo(-2,-2);
+      canv.context.stroke();
     }
   }
 };
