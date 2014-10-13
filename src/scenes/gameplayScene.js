@@ -506,11 +506,16 @@ var GamePlayScene = function(game, canv)
         canv.context.strokeStyle = "#8B1B05";
         canv.context.fillStyle = "#AB3B25";
         canv.context.beginPath();
-        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y-6,10,3.1415/4,3*3.1415/4, false);
-        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+6,10,5*3.1415/4,7*3.1415/4, false);
+        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y-8,10,3.1415/4,3*3.1415/4, false);
+        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+4,10,5*3.1415/4,7*3.1415/4, false);
         canv.context.closePath();
         canv.context.stroke();
         canv.context.fill();
+
+        canv.context.strokeStyle = "#FFFFFF";
+        canv.context.beginPath();
+        canv.context.arc(mod-(score/2+x)%mod-20-cam.x,canv.height-y-cam.y+6,10,11*3.1415/8,13*3.1415/8, false);
+        canv.context.stroke();
       }
     }
     self.tick = function()
