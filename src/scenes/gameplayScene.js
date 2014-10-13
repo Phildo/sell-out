@@ -54,7 +54,7 @@ var GamePlayScene = function(game, canv)
     grass = new Grass({}, camera);
     drawer.register(grass);
 
-    podium = new Podium({"x":40,"y":canv.height-36,"w":3,"h":26}, camera);
+    podium = new Podium({"x":38,"y":canv.height-36,"w":3,"h":26}, camera);
     drawer.register(podium);
 
     footballs = new Footballs({}, camera);
